@@ -37,7 +37,9 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/_ext/60843d1b/catch.o \
 	${OBJECTDIR}/_ext/511e4115/ksp_math.o \
-	${OBJECTDIR}/_ext/d2aa2781/test_ksp_utils.o
+	${OBJECTDIR}/_ext/217750e/rocket.o \
+	${OBJECTDIR}/_ext/d2aa2781/test_ksp_math.o \
+	${OBJECTDIR}/_ext/d2aa2781/test_rocket.o
 
 
 # C Compiler Flags
@@ -74,10 +76,20 @@ ${OBJECTDIR}/_ext/511e4115/ksp_math.o: ../src/ksp_math.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I../src -I../test -I../../catch -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/511e4115/ksp_math.o ../src/ksp_math.cpp
 
-${OBJECTDIR}/_ext/d2aa2781/test_ksp_utils.o: ../test/test_ksp_utils.cpp 
+${OBJECTDIR}/_ext/217750e/rocket.o: ../src/rocket/rocket.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/217750e
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I../src -I../test -I../../catch -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/217750e/rocket.o ../src/rocket/rocket.cpp
+
+${OBJECTDIR}/_ext/d2aa2781/test_ksp_math.o: ../test/test_ksp_math.cpp 
 	${MKDIR} -p ${OBJECTDIR}/_ext/d2aa2781
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../src -I../test -I../../catch -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d2aa2781/test_ksp_utils.o ../test/test_ksp_utils.cpp
+	$(COMPILE.cc) -g -I../src -I../test -I../../catch -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d2aa2781/test_ksp_math.o ../test/test_ksp_math.cpp
+
+${OBJECTDIR}/_ext/d2aa2781/test_rocket.o: ../test/test_rocket.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/d2aa2781
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I../src -I../test -I../../catch -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d2aa2781/test_rocket.o ../test/test_rocket.cpp
 
 # Subprojects
 .build-subprojects:

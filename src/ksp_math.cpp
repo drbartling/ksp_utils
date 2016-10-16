@@ -26,4 +26,8 @@ namespace TWR {
     double ComputeTWR(double thrust, double mass, double gee) {
         return thrust / mass / gee;
     }
+
+    double ComputeMass(double twr, double thrust, double gee) {
+        return thrust / twr / gee;
+    }
 }

@@ -32,6 +32,7 @@ namespace DeltaV {
  */
 namespace TWR {
     double ComputeTWR(double thrust, double mass, double gee);
+    double ComputeMass(double twr, double thrust, double gee);
 }
 
 #endif /* KSP_MATH_H */
