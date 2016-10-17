@@ -58,6 +58,22 @@ double Rocket::StageDryMass(stage_t stage) {
     return mass;
 }
 
+double Rocket::StageIsp(stage_t stage) {
+    double isp = 0;
+    double thrust = 0;
+    for (int i = 0; i < parts.size(); i++) {
+        if (stage == stages[i]) {
+            isp += parts[i]->isp * parts[i]->thrust;
+            thrust += parts[i]->thrust;
+        }
+    }
+    if (0.0 == thrust) {
+        return 0;
+    }
+    isp /= thrust;
+    return isp;
+}
+
 double Rocket::StageMass(stage_t stage) {
     double mass = 0;
     for (int i = 0; i < parts.size(); i++) {

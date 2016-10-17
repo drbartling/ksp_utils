@@ -24,6 +24,7 @@ public:
 
     stage_t StageCount();
     double StageDryMass(stage_t stage);
+    double StageIsp(stage_t stage);
     double StageMass(stage_t stage);
 
 private:

@@ -160,3 +160,53 @@ TEST_CASE("Stage Dry Mass", "[parts][mass][stage]") {
         }
     }
 }
+
+TEST_CASE("Computing Stage ISP", "[parts][stage][isp]") {
+
+    GIVEN("a new rocket") {
+        Rocket testRocket;
+        stage_t stage = 0;
+
+        THEN("Stage 0 ISP will be 0") {
+            REQUIRE(0 == testRocket.StageIsp(stage));
+        }
+
+        WHEN("Stage 0 has a motor") {
+
+            double isp = 345;
+            testRocket.PartAdd("LV-909", stage);
+
+            THEN("Stage 0 ISP will equal the ISP of the motor") {
+                REQUIRE(isp == testRocket.StageIsp(stage));
+            }
+
+            AND_WHEN("A motor is added to stage 1") {
+                stage = 1;
+                testRocket.PartAdd("LV-T30", stage);
+                isp = 310;
+
+                THEN("Stage 1 ISP will equal the ISP of the motor in stage 1") {
+                    REQUIRE(isp == testRocket.StageIsp(stage));
+                }
+
+                AND_WHEN("The same motor is added a second time") {
+                    testRocket.PartAdd("LV-T30", stage);
+
+                    THEN("The ISP will remain the same") {
+                        REQUIRE(isp == testRocket.StageIsp(stage));
+                    }
+
+                    AND_WHEN("A motor with a different ISP is added") {
+                        testRocket.PartAdd("LV-T45", stage);
+
+                        THEN("The ISP will be the average ISP of the motors weighted by thrust") {
+                            isp = (310.0 * 240.0) + (310.0 * 240.0) + (320.0 * 215.0);
+                            isp /= (240.0 + 240.0 + 215.0);
+                            REQUIRE(isp == testRocket.StageIsp(stage));
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
