@@ -3,7 +3,7 @@
 #include "ksp_math.h"
 #include <math.h>
 
-TEST_CASE("Delta V Equations") {
+TEST_CASE("Delta V Equations", "[Math]") {
 
     SECTION("Solving for Delta-V") {
         REQUIRE(0 == DeltaV::ComputeDeltaV(1e3, 1e3, 100));
@@ -84,7 +84,7 @@ TEST_CASE("Delta V Equations") {
     }
 }
 
-TEST_CASE("TWR Equations") {
+TEST_CASE("TWR Equations", "[Math]") {
 
     SECTION("Solving for TWR") {
 

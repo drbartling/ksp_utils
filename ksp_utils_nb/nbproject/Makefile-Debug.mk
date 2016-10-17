@@ -37,6 +37,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/_ext/60843d1b/catch.o \
 	${OBJECTDIR}/_ext/511e4115/ksp_math.o \
+	${OBJECTDIR}/_ext/511e4115/parts.o \
 	${OBJECTDIR}/_ext/217750e/rocket.o \
 	${OBJECTDIR}/_ext/d2aa2781/test_ksp_math.o \
 	${OBJECTDIR}/_ext/d2aa2781/test_rocket.o
@@ -75,6 +76,11 @@ ${OBJECTDIR}/_ext/511e4115/ksp_math.o: ../src/ksp_math.cpp
 	${MKDIR} -p ${OBJECTDIR}/_ext/511e4115
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I../src -I../test -I../../catch -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/511e4115/ksp_math.o ../src/ksp_math.cpp
+
+${OBJECTDIR}/_ext/511e4115/parts.o: ../src/parts.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/511e4115
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I../src -I../test -I../../catch -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/511e4115/parts.o ../src/parts.cpp
 
 ${OBJECTDIR}/_ext/217750e/rocket.o: ../src/rocket/rocket.cpp 
 	${MKDIR} -p ${OBJECTDIR}/_ext/217750e
