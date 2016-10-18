@@ -250,3 +250,48 @@ TEST_CASE("Computing stage thrust") {
         }
     }
 }
+
+TEST_CASE("Asparagus staging") {
+
+    GIVEN("This 3 stage rocket") {
+        Rocket testRocket;
+        double thrust = 0;
+        double ispSum = 0;
+
+        stage_t stage = 0;
+        testRocket.PartAdd("MK16 Parachute", stage);
+        testRocket.PartAdd("MK1 Command Pod", stage);
+
+        stage = 1;
+        testRocket.PartAdd("TR-18A", stage);
+        testRocket.PartAdd("FL-T800", stage);
+        testRocket.PartAdd("LV-T45", stage);
+        thrust += 215;
+        ispSum += 320 * 215;
+
+        stage = 2;
+        testRocket.PartAdd("TT-38K", stage);
+        testRocket.PartAdd("FL-T800", stage);
+        testRocket.PartAdd("LV-T30", stage);
+        testRocket.PartAdd("TT-38K", stage);
+        testRocket.PartAdd("FL-T800", stage);
+        testRocket.PartAdd("LV-T30", stage);
+        thrust += (240 * 2);
+        ispSum += (240 * 2 * 310);
+
+        double isp = ispSum / thrust;
+
+        WHEN("Stage 2 is an asparagus stage") {
+            stage = 2;
+            testRocket.StageAsparagusSet(stage, 1);
+
+            THEN("Stage thrust will be combined with next lower stage when computed") {
+                REQUIRE(thrust == testRocket.StageThrust(stage));
+            }
+
+            AND_THEN("Stage ISP will be averaged with next lower stage") {
+                REQUIRE(isp == testRocket.StageIsp(stage));
+            }
+        }
+    }
+}

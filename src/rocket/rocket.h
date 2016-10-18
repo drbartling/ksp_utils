@@ -22,6 +22,7 @@ public:
     void PartAdd(std::string partName, stage_t stage);
     part_count_t PartCount();
 
+    void StageAsparagusSet(stage_t stage, bool asparagus);
     stage_t StageCount();
     double StageDryMass(stage_t stage);
     double StageIsp(stage_t stage);
@@ -29,6 +30,7 @@ public:
     double StageThrust(stage_t stage);
 
 private:
+    bool asparagus[100] = {false};
     std::vector<Part*> parts;
     std::vector<stage_t> stages;
     stage_t stageCount;

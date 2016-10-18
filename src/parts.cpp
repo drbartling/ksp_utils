@@ -18,6 +18,9 @@ Part partList[] = {
     {"MK16 Parachute", 0.1, 0.1, 0, 0},
     {"Tail Fin", 0.125, 0.125, 0, 0},
     {"TR-18A", 0.05, 0.05, 0, 0},
+    {"TT-38K", 0.025, 0.025, 0, 0},
+
+
 };
 
 Part *PartFindByName(std::string name) {

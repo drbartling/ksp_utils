@@ -42,6 +42,10 @@ part_count_t Rocket::PartCount() {
     return this->parts.size();
 }
 
+void Rocket::StageAsparagusSet(stage_t stage, bool _asparagus) {
+    this->asparagus[stage] = _asparagus;
+}
+
 stage_t Rocket::StageCount() {
     return stageCount;
 }
@@ -61,6 +65,10 @@ double Rocket::StageDryMass(stage_t stage) {
 double Rocket::StageIsp(stage_t stage) {
     double isp = 0;
     double thrust = 0;
+    if (true == this->asparagus[stage]) {
+        thrust += this->StageThrust(stage - 1);
+        isp += (thrust * this->StageIsp(stage - 1));
+    }
     for (int i = 0; i < parts.size(); i++) {
         if (stage == stages[i]) {
             isp += parts[i]->isp * parts[i]->thrust;
@@ -86,6 +94,9 @@ double Rocket::StageMass(stage_t stage) {
 
 double Rocket::StageThrust(stage_t stage) {
     double thrust = 0;
+    if (true == this->asparagus[stage]) {
+        thrust += this->StageThrust(stage - 1);
+    }
     for (int i = 0; i < parts.size(); i++) {
         if (stage == stages[i]) {
             thrust += parts[i]->thrust;
