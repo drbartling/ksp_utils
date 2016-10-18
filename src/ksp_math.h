@@ -25,6 +25,7 @@ namespace DeltaV {
     double ComputeMassInitial(double deltaV, double massFinal, double isp);
     double ComputeMassFinal(double deltaV, double massInitial, double isp);
     double ComputeIsp(double deltaV, double massInitial, double massFinal);
+    double ComputePayload(double deltaV, double massInitial, double massFinal, double isp);
 }
 
 /**

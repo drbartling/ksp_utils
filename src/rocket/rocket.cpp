@@ -83,3 +83,13 @@ double Rocket::StageMass(stage_t stage) {
     }
     return mass;
 }
+
+double Rocket::StageThrust(stage_t stage) {
+    double thrust = 0;
+    for (int i = 0; i < parts.size(); i++) {
+        if (stage == stages[i]) {
+            thrust += parts[i]->thrust;
+        }
+    }
+    return thrust;
+}

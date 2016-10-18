@@ -40,7 +40,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/_ext/511e4115/parts.o \
 	${OBJECTDIR}/_ext/217750e/rocket.o \
 	${OBJECTDIR}/_ext/d2aa2781/test_ksp_math.o \
-	${OBJECTDIR}/_ext/d2aa2781/test_rocket.o
+	${OBJECTDIR}/_ext/d2aa2781/test_rocket.o \
+	${OBJECTDIR}/_ext/d2aa2781/test_rocket_build.o
 
 
 # C Compiler Flags
@@ -96,6 +97,11 @@ ${OBJECTDIR}/_ext/d2aa2781/test_rocket.o: ../test/test_rocket.cpp
 	${MKDIR} -p ${OBJECTDIR}/_ext/d2aa2781
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d2aa2781/test_rocket.o ../test/test_rocket.cpp
+
+${OBJECTDIR}/_ext/d2aa2781/test_rocket_build.o: ../test/test_rocket_build.cpp 
+	${MKDIR} -p ${OBJECTDIR}/_ext/d2aa2781
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d2aa2781/test_rocket_build.o ../test/test_rocket_build.cpp
 
 # Subprojects
 .build-subprojects:

@@ -26,12 +26,12 @@ public:
     double StageDryMass(stage_t stage);
     double StageIsp(stage_t stage);
     double StageMass(stage_t stage);
+    double StageThrust(stage_t stage);
 
 private:
     std::vector<Part*> parts;
     std::vector<stage_t> stages;
     stage_t stageCount;
-
 };
 
 #endif /* ROCKET_H */

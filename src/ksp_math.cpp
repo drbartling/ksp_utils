@@ -19,6 +19,10 @@ namespace DeltaV {
     double ComputeIsp(double deltaV, double massInitial, double massFinal) {
         return deltaV / (log(massInitial / massFinal) * KEE);
     }
+
+    double ComputePayload(double deltaV, double massInitial, double massFinal, double isp) {
+        return (massInitial - exp(deltaV / isp / KEE) * massFinal) / (exp(deltaV / isp / KEE) - 1);
+    }
 }
 
 namespace TWR {

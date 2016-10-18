@@ -210,3 +210,43 @@ TEST_CASE("Computing Stage ISP", "[parts][stage][isp]") {
         }
     }
 }
+
+TEST_CASE("Computing stage thrust") {
+
+    GIVEN("a new rocket") {
+        Rocket testRocket;
+        stage_t stage = 0;
+
+        THEN("Stage 0 ISP will be 0") {
+            REQUIRE(0 == testRocket.StageThrust(stage));
+        }
+
+        WHEN("Stage 0 has a motor") {
+            double thrust = 60;
+            testRocket.PartAdd("LV-909", stage);
+
+            THEN("Stage 0 thrust will equal the thrust of the motor") {
+                REQUIRE(thrust == testRocket.StageThrust(stage));
+            }
+
+            AND_WHEN("A motor is added to stage 1") {
+                stage = 1;
+                testRocket.PartAdd("LV-T30", stage);
+                thrust = 240;
+
+                THEN("Stage 1 thrust will equal the thrust of the motor in stage 1") {
+                    REQUIRE(thrust == testRocket.StageThrust(stage));
+                }
+
+                AND_WHEN("Another motor is added to stage 1") {
+                    testRocket.PartAdd("LV-T45", stage);
+                    thrust += 215;
+
+                    THEN("The thrust will equal the sum of the two motor thrusts") {
+                        REQUIRE(thrust == testRocket.StageThrust(stage));
+                    }
+                }
+            }
+        }
+    }
+}

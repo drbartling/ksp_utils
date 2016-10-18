@@ -16,6 +16,7 @@
     <logicalFolder name="test" displayName="test" projectFiles="true">
       <itemPath>../test/test_ksp_math.cpp</itemPath>
       <itemPath>../test/test_rocket.cpp</itemPath>
+      <itemPath>../test/test_rocket_build.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -71,6 +72,8 @@
       </item>
       <item path="../test/test_rocket.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="../test/test_rocket_build.cpp" ex="false" tool="1" flavor2="0">
+      </item>
     </conf>
     <conf name="Release" type="1">
       <toolsSet>
@@ -111,6 +114,8 @@
       <item path="../test/test_ksp_math.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../test/test_rocket.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../test/test_rocket_build.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
   </confs>
