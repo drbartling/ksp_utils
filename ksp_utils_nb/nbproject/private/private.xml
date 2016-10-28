@@ -7,12 +7,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ryanb/Documents/GitHub/ksp_utils/src/rocket/rocket.h</file>
-            <file>file:/C:/Users/ryanb/Documents/GitHub/ksp_utils/src/parts.cpp</file>
-            <file>file:/C:/Users/ryanb/Documents/GitHub/ksp_utils/src/parts.h</file>
-            <file>file:/C:/Users/ryanb/Documents/GitHub/ksp_utils/test/test_rocket.cpp</file>
-            <file>file:/C:/Users/ryanb/Documents/GitHub/ksp_utils/src/rocket/rocket.cpp</file>
-            <file>file:/C:/Users/ryanb/Documents/GitHub/catch/catch.hpp</file>
+            <file>file:/C:/Users/ryanb/Documents/GitHub/ksp_utils/test/test_rocket_build.cpp</file>
         </group>
     </open-files>
 </project-private>

@@ -15,4 +15,6 @@ typedef struct {
 
 Part *PartFindByName(std::string name);
 
+void PartPayloadMassSet(double mass);
+
 #endif /* PARTS_H */

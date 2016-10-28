@@ -10,6 +10,26 @@ TEST_CASE("Example Rocket") {
     GIVEN("A Single Stage Booster") {
         Rocket booster;
         stage_t stage = 0;
+
+        PartPayloadMassSet(6); 
+        booster.PartAdd("Payload");
+        // Munar Injection
+        booster.PartAdd("FL-T800", stage);
+        booster.PartAdd("TR-18A", stage);
+        booster.PartAdd("LV-909", stage);
+        stage++;
+        for (int j = 0; j < 3; j++, stage++) {
+            for (int i = 0; i < 2; i++) {
+                if(j == 0) {
+                    booster.PartAdd("LV-909", stage);
+                }
+                booster.PartAdd("TT-38K", stage);
+                booster.PartAdd("FL-T400", stage);
+                booster.PartAdd("Aerodynamic Nose Cone", stage);
+                booster.StageAsparagusSet(stage, true);
+            }
+        }
+        // LKO Insertion
         booster.PartAdd("TR-18A", stage);
         for (int i = 0; i < 2; i++) {
             booster.PartAdd("FL-T800", stage);
@@ -21,6 +41,7 @@ TEST_CASE("Example Rocket") {
         stage++;
         for (int j = 0; j < 3; j++, stage++) {
             for (int i = 0; i < 2; i++) {
+                booster.PartAdd("TT-38K", stage);
                 booster.PartAdd("LV-T30", stage);
                 booster.PartAdd("FL-T800", stage);
                 booster.PartAdd("FL-T800", stage);
@@ -30,20 +51,41 @@ TEST_CASE("Example Rocket") {
             }
         }
 
+        // Start report
         stage_t stages = booster.StageCount() + 1;
         std::cout << "Stages: " << stages << "\r\n";
 
-        double deltaV = 0;
-        for (int i = 0; i < stages; i++) {
-            deltaV += DeltaV::ComputeDeltaV(
+        // Stage report
+        std::cout << "Stage \t";
+        std::cout << "Mass-Tot \tMass-Stage \t";
+        std::cout << "dV-Tot \tdV-Stage \t";
+        std::cout << "TWR \t";
+        std::cout << "\r\n";
+        double rocketDeltaV = 0;
+        double rocketMass = 0;
+        for(int i = stages - 1; i >= 0; i--) {
+
+            double stageMass = booster.StageMass(i);
+            rocketMass += stageMass;
+
+            double stageDeltaV = DeltaV::ComputeDeltaV(
                     booster.StageMass(i),
                     booster.StageDryMass(i),
                     booster.StageIsp(i));
-        }
-        std::cout << "Delta V: " << deltaV << "\r\n";
+            rocketDeltaV += stageDeltaV;
 
-        double twr = TWR::ComputeTWR(booster.StageThrust(stages - 1), booster.StageMass(stages - 1), KEE);
-        std::cout << "TWR: " << twr << "\r\n";
+            double twr = TWR::ComputeTWR(
+                    booster.StageThrust(i),
+                    booster.StageMass(i),
+                    KEE);
+
+            std::cout << i << " \t";
+            std::cout << rocketMass << " \t\t" << stageMass << " \t\t";
+            std::cout << (int)rocketDeltaV << " \t" << (int)stageDeltaV << " \t\t";
+            std::cout <<  twr << " \t";
+            std::cout << "\r\n";
+        }
+        std::cout << std::endl;
 
         double dVToOrbit = 3400;
         dVToOrbit *= 1.1; // Some spare + some to get back down.
@@ -63,15 +105,5 @@ TEST_CASE("Example Rocket") {
                     booster.StageIsp(i));
         }
         std::cout << "dV with Max Payload: " << deltaVWithMaxPayload << "\r\n";
-
-        double payload = 16;
-        double deltaVWithPayload = 0;
-        for (int i = 0; i < stages; i++) {
-            deltaVWithPayload += DeltaV::ComputeDeltaV(
-                    booster.StageMass(i) + payload,
-                    booster.StageDryMass(i) + payload,
-                    booster.StageIsp(i));
-        }
-        std::cout << "dV with Payload: " << deltaVWithPayload << "\r\n";
     }
 }

@@ -20,7 +20,7 @@ Part partList[] = {
     {"TR-18A", 0.05, 0.05, 0, 0},
     {"TT-38K", 0.025, 0.025, 0, 0},
 
-
+    {"Payload", 0, 0, 0, 0},
 };
 
 Part *PartFindByName(std::string name) {
@@ -30,4 +30,10 @@ Part *PartFindByName(std::string name) {
         }
     }
     return NULL;
+}
+
+void PartPayloadMassSet(double mass) {
+    Part *payload = PartFindByName("Payload");
+    payload->mass = mass;
+    payload->dryMass = mass;
 }

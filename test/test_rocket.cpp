@@ -49,7 +49,7 @@ TEST_CASE("Add parts to stages", "[parts][stages]") {
 
             AND_WHEN("Parts are added to stage 1") {
                 stage = 1;
-                testRocket.PartAdd("TR-18A", stage);
+                testRocket.PartAdd("LV-T30", stage);
 
                 THEN("Stage count will be 2") {
                     REQUIRE(2 == testRocket.StageCount());
